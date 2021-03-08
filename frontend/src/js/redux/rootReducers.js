@@ -6,6 +6,8 @@ import register from './modules/cuenta/register';
 import profile from './modules/cuenta/profile';
 import usuarios from './modules/usuarios/usuarios';
 import notificaciones from './modules/notificaciones/notificaciones';
+import nivel from './modules/nivel/nivel'
+import grado from './modules/grado/grado'
 
 export default combineReducers({
     form: formReducer,
@@ -15,4 +17,6 @@ export default combineReducers({
     usuarios,
     routing,
     notificaciones,
+    nivel,
+    grado,
 });

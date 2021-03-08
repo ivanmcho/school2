@@ -28,12 +28,15 @@ class Acciones extends Component {
     };
 
     render() {
-        const { id, ver, editar, eliminar } = this.props;
+        const { id, ver, editar, eliminar, leer } = this.props;
 
         return (
             <div className="d-flex justify-content-center">
                 {(ver !== undefined) && (
                     <Link to={`${ver}/${id}/`} className="px-2" ><i className="material-icons">remove_red_eye</i></Link>
+                )}
+                {(leer !== undefined) && (
+                    <Link to={`${leer}/${id}/ver`} className="px-2" ><i className="material-icons">remove_red_eye</i></Link>
                 )}
                 {(editar !== undefined) && (
                     <Link className="text-warning" to={`${editar}/${id}/editar`} ><i className="material-icons">edit</i></Link>

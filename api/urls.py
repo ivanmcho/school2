@@ -7,7 +7,8 @@ from api import viewsets
 
 router = DefaultRouter()
 router.register(r'user', viewsets.UserViewset)
-
+router.register(r'nivel', viewsets.NivelViewset)
+router.register(r'grado', viewsets.GradoViewset)
 
 urlpatterns = [
     path('api/', include(router.urls)),

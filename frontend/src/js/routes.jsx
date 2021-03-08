@@ -22,6 +22,13 @@ import Notificaciones from './common/components/Examples/Notificaciones';
 import ExampleTabs from './common/components/Examples/Tabs/Tabs';
 require('../style/index.css');
 
+
+import CrearNivel from "./common/components/Nivel/CrearNivelContainer";
+import Nivel from "./common/components/Nivel/ListadoContainer";
+
+import CrearGrado from "./common/components/Grado/CrearGradoContainer";
+import Grado from "./common/components/Grado/ListadoContainer";
+
 module.exports = (
     <div>
         <div className="container__content">
@@ -34,6 +41,43 @@ module.exports = (
                 <ProtectedRoute exact path="/grids" component={Grids} />
                 <ProtectedRoute exact path="/notifications" component={Notificaciones} />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
+
+                                {/* __________________Nivel_____ */}
+                                <ProtectedRoute exact path="/nivel" component={Nivel} />
+                <ProtectedRoute
+                    exact
+                    path="/nivel/:id/ver"
+                    component={CrearNivel}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/nivel/:id/editar"
+                    component={CrearNivel}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/nivel/create"
+                    component={CrearNivel}
+                />
+                {/* ____________Grado________ */}
+                <ProtectedRoute exact path="/grado" component={Grado} />
+                <ProtectedRoute
+                    exact
+                    path="/grado/:id/ver"
+                    component={CrearGrado}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/grado/:id/editar"
+                    component={CrearGrado}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/grado/create"
+                    component={CrearGrado}
+                />
+
+
                 <Route component={NotFound} />
             </Switch>
         </div>
