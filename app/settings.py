@@ -24,6 +24,7 @@ SITE_ID = 1
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'h70dp)&5zyb%u0l+9v+811!2!8)k7=d7-s^gnr5ke#1t9bm^3e'
 
+AUTH_USER_MODEL = 'api.User'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
     'api',
     'mptt',
     'django.contrib.sites',
-    'djcelery',
+    #'djcelery',
     'debug_toolbar',
 ]
 
