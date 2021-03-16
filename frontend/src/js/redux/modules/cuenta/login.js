@@ -54,6 +54,7 @@ export const getMe = () => (dispatch) => {
 };
 
 export const logOut = () => (dispatch) => {
+    console.log("SAliendo------------")
     api.post('/user/logout').then(() => {
     }).catch(() => {
     }).finally(() => {});

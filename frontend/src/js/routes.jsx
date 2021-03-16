@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 
-import {Login, Profile, Registro} from './common/components/LoginRegister';
+import {Login,  Registro} from './common/components/LoginRegister';
 import Demo from './common/components/Demo/Demo';
 import ProtectedRoute from './ProtectedRoute';
 import Examples from './common/components/Examples/Basic';
@@ -26,8 +26,14 @@ require('../style/index.css');
 import CrearNivel from "./common/components/Nivel/CrearNivelContainer";
 import Nivel from "./common/components/Nivel/ListadoContainer";
 
+import CrearRol from "./common/components/Rol/CrearRolContainer";
+import Rol from "./common/components/Rol/ListadoContainer";
+
 import CrearGrado from "./common/components/Grado/CrearGradoContainer";
 import Grado from "./common/components/Grado/ListadoContainer";
+import Profile from "./common/components/Estudiante/profileContainer";
+
+
 
 module.exports = (
     <div>
@@ -42,8 +48,8 @@ module.exports = (
                 <ProtectedRoute exact path="/notifications" component={Notificaciones} />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
 
-                                {/* __________________Nivel_____ */}
-                                <ProtectedRoute exact path="/nivel" component={Nivel} />
+                {/* __________________Nivel_____ */}
+                <ProtectedRoute exact path="/nivel" component={Nivel} />
                 <ProtectedRoute
                     exact
                     path="/nivel/:id/ver"
@@ -58,6 +64,23 @@ module.exports = (
                     exact
                     path="/nivel/create"
                     component={CrearNivel}
+                />
+                {/* __________________Rol_____ */}
+                <ProtectedRoute exact path="/rol" component={Rol} />
+                <ProtectedRoute
+                    exact
+                    path="/rol/:id/ver"
+                    component={CrearRol}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/rol/:id/editar"
+                    component={CrearRol}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/rol/create"
+                    component={CrearRol}
                 />
                 {/* ____________Grado________ */}
                 <ProtectedRoute exact path="/grado" component={Grado} />
@@ -76,7 +99,17 @@ module.exports = (
                     path="/grado/create"
                     component={CrearGrado}
                 />
-
+                {/* ____________Estudiante________ */}
+                <ProtectedRoute
+                    exact
+                    path="/estudiante/create"
+                    component={Profile}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/estudiante/:id/ver"
+                    component={Profile}
+                />
 
                 <Route component={NotFound} />
             </Switch>

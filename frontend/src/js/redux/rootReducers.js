@@ -6,8 +6,11 @@ import register from './modules/cuenta/register';
 import profile from './modules/cuenta/profile';
 import usuarios from './modules/usuarios/usuarios';
 import notificaciones from './modules/notificaciones/notificaciones';
+
 import nivel from './modules/nivel/nivel'
+import rol from './modules/rol/rol'
 import grado from './modules/grado/grado'
+import usuariosPersonal from "./modules/usuarios/usuariosPersonal";
 
 export default combineReducers({
     form: formReducer,
@@ -19,4 +22,6 @@ export default combineReducers({
     notificaciones,
     nivel,
     grado,
+    usuariosPersonal,
+    rol,
 });
