@@ -41,6 +41,7 @@ class UserViewset(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        print(serializer.data)
         usuario = User.objects.get(username=request.data["username"])
         usuario.set_password(request.data["password"])
         usuario.save()

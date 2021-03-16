@@ -1,4 +1,4 @@
-from .user import UserSerializer, UserReadSerializer
+from .user import UserSerializer, UserReadSerializer, UserRegistroSerializer
 from .asignacion import AsignacionRegistroSerializer, AsignacionSerializer
 from .catedratico import CatedraticoRegistroSerializer, CatedraticoSerializer
 from .cicloEscolar import CicloEscolarRegistroSerializer, CicloEscolarSerializer

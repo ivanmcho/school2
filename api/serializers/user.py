@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from api.models.m_users import User
-from api.models import Profile
+from api.models import Profile, Estudiante
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -37,4 +37,17 @@ class UserReadSerializer(serializers.ModelSerializer):
             'is_staff',
             'email',
             'profile',
+        )
+
+class UserRegistroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'password',
+            'address',
+            'phone',
+            'rol',
         )

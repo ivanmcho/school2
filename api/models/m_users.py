@@ -13,3 +13,5 @@ class User(AbstractUser):
     extend the functionality.
     """
     rol = models.ForeignKey(Rol, blank=True, null=True, on_delete=models.CASCADE, related_name='user_rol')
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    address = models.CharField(max_length=250, null=True, blank=True)

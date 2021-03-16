@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from api.models import Estudiante
+from api.models import Estudiante, User
+from api.serializers import UserRegistroSerializer
 
 
 class EstudianteSerializer(serializers.ModelSerializer):
@@ -17,12 +18,14 @@ class EstudianteSerializer(serializers.ModelSerializer):
 
 
 class EstudianteRegistroSerializer(serializers.ModelSerializer):
+    user = UserRegistroSerializer()
+    
     class Meta:
         model = Estudiante
         fields = (
-                'user',
-                'carnet',
-                'contacto',
-                'direccion_contacto',
-                'telefono_contacto',
-            )
+            'user',
+            'carnet',
+            'contacto',
+            'direccion_contacto',
+            'telefono_contacto',
+        )
