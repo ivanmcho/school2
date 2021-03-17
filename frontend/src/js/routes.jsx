@@ -31,7 +31,10 @@ import Rol from "./common/components/Rol/ListadoContainer";
 
 import CrearGrado from "./common/components/Grado/CrearGradoContainer";
 import Grado from "./common/components/Grado/ListadoContainer";
+
 import Profile from "./common/components/Estudiante/profileContainer";
+import Usuarios from "./common/components/Estudiante/ListadoContainer";
+
 
 
 
@@ -110,6 +113,12 @@ module.exports = (
                     path="/estudiante/:id/ver"
                     component={Profile}
                 />
+                <ProtectedRoute
+                    exact
+                    path="/estudiante/:id/editar"
+                    component={Profile}
+                />
+                <ProtectedRoute exact path="/estudiantes" component={Usuarios} />
 
                 <Route component={NotFound} />
             </Switch>

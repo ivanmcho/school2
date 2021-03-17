@@ -8,14 +8,41 @@ import _ from "lodash";
 const SET_DATA = "SET_DATA";
 const SET_LOADER = "SET_LOADER";
 const SET_REGISTRO = "SET_REGISTRO";
+const SEARCH_USERS = "SEARCH_USERS";
+const PAGE = "VIEW_PAGE";
 const SHOW_FORM = "SHOW_FORM";
 
+// ------------------------------------
+// Constants
+// ------------------------------------
+const setLoader = (loader) => ({
+    type: SET_LOADER,
+    loader,
+});
+
+const setSearch = (search) => ({
+    type: SEARCH_USERS,
+    search,
+} );
+
+const setPage = (page) => ({
+    type: PAGE,
+    page,
+} );
+
+
 // Este es el redux que se utiliza con profile2
-export const listar = () => (dispatch, getStore) => {
+export const listar = (page = 1) => (dispatch, getStore) => {
+    const resource = getStore().usuariosPersonal;
+    const params = { page };
+    params.search = resource.search;
+    console.log("UUUUU", resource);
     dispatch({ type: SET_LOADER, loader: true });
-    api.get("user")
+    api.get("estudiante", params)
         .then((response) => {
-            dispatch({ type: SET_DATA, data: response });
+            console.log("response", response);
+            dispatch( { type: SET_DATA, data: response } );
+            dispatch(setPage(page));
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -25,15 +52,55 @@ export const listar = () => (dispatch, getStore) => {
         });
 };
 
-export const editar = (id) => (dispatch, getStore) => {
+
+const leerEstudiante = id => (dispatch) => {
+    api.get(`estudiante/${id}`).then((response) => {
+        console.log("Estdiante ",response.user.username)
+        response.username = response.user.username;
+        response.address = response.user.address;
+        response.first_name = response.user.first_name;
+        response.last_name = response.user.last_name;
+        response.phone = response.user.phone;
+        console.log("EEEE ",response)
+        //address y phone
+        dispatch(initializeForm("profile2", response));
+    }).catch(() => {
+    }).finally(() => {
+    });
+};
+
+export const editar = (id, data) => (dispatch, getStore) => {
     dispatch({ type: SET_LOADER, loader: true });
     console.log("desde USuarioPersonal");
-    api.get(`user/${id}`)
+    const estado = getStore();
+    const formData = {
+        
+            carnet: data.carnet,
+            contacto: data.contacto,
+            direccion_contacto: data.direccion_contacto,
+            telefono_contacto: data.telefono_contacto,
+            user:{
+                username: data.username,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                phone: data.phone,
+                address: data.address,
+                rol: 1,
+                password: "Temporal",
+            }
+        
+    }
+
+    console.log(formData);
+
+    api.put(`estudiante/${id}`, formData)
         .then((response) => {
-            // response.idCategoria = { label: "Desarrollo", value: 2 };
-            console.log("response editar DAta: ", response);
-            dispatch(initializeForm("profile2", response));
-            dispatch({ type: SET_REGISTRO, registro: response });
+            NotificationManager.success(
+                "Usaurio Actualizado correctamente",
+                "Éxito",
+                3000
+            );
+            //dispatch(push("/usuarios"));
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -73,7 +140,7 @@ export const registrarUser = (data) => (dispatch, getStore) => {
                 "Éxito",
                 3000
             );
-            dispatch(push("/usuarios"));
+            dispatch(push("/estudiantes"));
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -105,6 +172,11 @@ export const actualizarUser = () => (dispatch, getStore) => {
             NotificationManager.error(error.detail, "ERROR", 0);
         })
         .finally(() => {});
+};
+
+const searchChange = (search) => (dispatch) => {
+    dispatch(setSearch(search));
+    dispatch(listar());
 };
 
 const showForm = (show) => (dispatch) => {
@@ -162,10 +234,12 @@ export const actions = {
     registrarUser,
     actualizarUser,
     listar,
+    searchChange,
     editar,
     showForm,
     registrarEmpresa,
     registrarProyecto,
+    leerEstudiante,    
 };
 
 export const reducers = {
@@ -195,14 +269,30 @@ export const reducers = {
             show_form,
         };
     },
+
+    [PAGE]: (state, { page }) => {
+            return {
+                ...state,
+                page,
+            };
+    },
+    [SEARCH_USERS]: (state, { search }) => {
+        return {
+            ...state,
+            search,
+        };
+    },
 };
 
 export const initialState = {
     loader: false,
     me: {},
+    page:1,
     show_form: false,
-    data: [],
+    data: {},
     registro: null,
+    search: "",
 };
+
 
 export default handleActions(reducers, initialState);

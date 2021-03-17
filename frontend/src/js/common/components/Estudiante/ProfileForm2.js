@@ -171,9 +171,9 @@ const ProfileForm2 = (props) => {
                     <div className="border-bottom card-header m-1">
                         { isNested? <h5 className="m-0 p-0 color-003"><strong>Agregar Cliente</strong></h5>:
                         <h3 className="m-0 txt-22-n color-003">
-                            { actualizar && !ver? "Actualizar Usuario": null}
+                            { actualizar && !ver? "Actualizar Estudiante": null}
                             { !actualizar && !ver? "Agregar Estudiante": null}
-                            { actualizar && ver? "Ver Usuario": null}
+                            { actualizar && ver? "Ver Estudiante": null}
                         </h3>}
                     </div>
                     { isNested? ()=>(styleForm='p-0 m-0 d-flex flex-column flex-md-row'):null }
@@ -357,8 +357,8 @@ const ProfileForm2 = (props) => {
                             )
                         : 
                         (<a 
-                        className="btn btn-primary mr-1"
-                        href="/#/usuarios" >Regresar </a>)}
+                        className = "btn btn-secondary mr-1"
+                        href="/#/estudiantes" >Regresar </a>)}
 
                         {!ver && (
                             <button

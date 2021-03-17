@@ -3,7 +3,7 @@ from .asignacion import AsignacionRegistroSerializer, AsignacionSerializer
 from .catedratico import CatedraticoRegistroSerializer, CatedraticoSerializer
 from .cicloEscolar import CicloEscolarRegistroSerializer, CicloEscolarSerializer
 from .curso import CursoRegistroSerializer, CursoSerializer
-from .estudiante import EstudianteRegistroSerializer, EstudianteSerializer
+from .estudiante import EstudianteRegistroSerializer, EstudianteSerializer, EstudianteReadSerializer
 from .evento import EventoegistroSerializer, EventoSerializer
 from .grado import GradoRegistroSerializer, GradoSerializer
 from .materialClase import MaterialClaseRegistroSerializer, MaterialClaseSerializer

@@ -29,3 +29,17 @@ class EstudianteRegistroSerializer(serializers.ModelSerializer):
             'direccion_contacto',
             'telefono_contacto',
         )
+
+class EstudianteReadSerializer(serializers.ModelSerializer):
+    user = UserRegistroSerializer()
+    
+    class Meta:
+        model = Estudiante
+        fields = (
+            'id',
+            'user',
+            'carnet',
+            'contacto',
+            'direccion_contacto',
+            'telefono_contacto',
+        )

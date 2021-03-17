@@ -49,7 +49,7 @@ class ListadoNivel extends Component {
                     <h3 className="txt-22-n color-003 w-50">Nivels</h3>
 
                     <div className="d-flex flex-row justify-content-between align-items-center flex-fill ">
-                        <a className="btn-primario2" href="/#/nivel/create">
+                        <a className="btn btn-secondary mr-1" href="/#/nivel/create">
                             Agregar Nivel
                         </a>
 
