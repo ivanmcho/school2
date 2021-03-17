@@ -12,7 +12,7 @@ from api.serializers import ProfesionRegistroSerializer, ProfesionSerializer
 from django.db import transaction
 from copy import deepcopy
 
-class SeccionViewset(viewsets.ModelViewSet):
+class ProfesionViewset(viewsets.ModelViewSet):
     queryset = Profesion.objects.filter(activo=True)
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)

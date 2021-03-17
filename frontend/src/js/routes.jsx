@@ -35,6 +35,8 @@ import Grado from "./common/components/Grado/ListadoContainer";
 import CrearEstudiante from "./common/components/Estudiante/CrearEstudianteContainer";
 import Estudiantes from "./common/components/Estudiante/ListadoContainer";
 
+import CrearProfesion from "./common/components/Profesion/CrearProfesionContainer";
+import Profesiones from "./common/components/Profesion/ListadoContainer";
 
 
 
@@ -119,6 +121,24 @@ module.exports = (
                     component={CrearEstudiante}
                 />
                 <ProtectedRoute exact path="/estudiantes" component={Estudiantes} />
+
+                {/* __________Profesion________ */}
+                <ProtectedRoute
+                    exact
+                    path="/profesion/create"
+                    component={CrearProfesion}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/profesion/:id/ver"
+                    component={CrearProfesion}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/profesion/:id/editar"
+                    component={CrearProfesion}
+                />
+                <ProtectedRoute exact path="/profesiones" component={Profesiones} />
 
                 <Route component={NotFound} />
             </Switch>
