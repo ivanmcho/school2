@@ -48,7 +48,7 @@ class Sucursal extends Component {
                     <h3 className="txt-22-n color-003 w-50">Grados</h3>
 
                     <div className="d-flex flex-row w-50 align-items-center justify-content-end">
-                        <a className="btn-primario2" href="/#/grado/create">
+                        <a className="btn btn-secondary mr-1" href="/#/grado/create">
                             Agregar grado
                         </a>
 
@@ -74,43 +74,50 @@ class Sucursal extends Component {
                         </div>
                     </div>
                 </div>
-                <Grid
-                    data={data}
-                    loading={loader}
-                    onPageChange={listar}
-                    page={page}
-                    onSortChange={onSortChange}
-                >
-                    
+                <div className="mb-4 col-12">
+                    <div className="mb-4 card card-small">
+                        <div className="border-bottom card-header"><h6 className="m-0">Administrar Grados</h6></div>
+                            <div className="p-0 px-3 pt-3">
+                            <Grid
+                                data={data}
+                                loading={loader}
+                                onPageChange={listar}
+                                page={page}
+                                onSortChange={onSortChange}
+                            >
+                                
 
-                    <TableHeaderColumn dataField="nombre" dataSort>
-                        Nombre
-                    </TableHeaderColumn>
+                                <TableHeaderColumn dataField="nombre" dataSort>
+                                    Nombre
+                                </TableHeaderColumn>
 
-                    <TableHeaderColumn
-                        dataField="nivel"
-                        dataSort
-                        dataFormat={(cell) => {
-                            return cell.nombre;
-                        }} //cell tiene solo el dato de datafiel
-                        //arrow si contiene todos los datos
-                    >
-                        Nivel
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                        isKey
-                        dataField="id"
-                        dataAlign="center"
-                        dataSort
-                        dataFormat={standardActions({
-                            editar: "grado",
-                            leer: "grado",
-                            eliminar,
-                        })}
-                    >
-                        Acciones
-                    </TableHeaderColumn>
-                </Grid>
+                                <TableHeaderColumn
+                                    dataField="nivel"
+                                    dataSort
+                                    dataFormat={(cell) => {
+                                        return cell.nombre;
+                                    }} //cell tiene solo el dato de datafiel
+                                    //arrow si contiene todos los datos
+                                >
+                                    Nivel
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    isKey
+                                    dataField="id"
+                                    dataAlign="center"
+                                    dataSort
+                                    dataFormat={standardActions({
+                                        editar: "grado",
+                                        leer: "grado",
+                                        eliminar,
+                                    })}
+                                >
+                                    Acciones
+                                </TableHeaderColumn>
+                            </Grid>
+                        </div>
+                        </div>
+                    </div>
             </div>
         );
     }

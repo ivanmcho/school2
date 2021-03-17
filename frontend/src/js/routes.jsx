@@ -32,8 +32,8 @@ import Rol from "./common/components/Rol/ListadoContainer";
 import CrearGrado from "./common/components/Grado/CrearGradoContainer";
 import Grado from "./common/components/Grado/ListadoContainer";
 
-import Profile from "./common/components/Estudiante/profileContainer";
-import Usuarios from "./common/components/Estudiante/ListadoContainer";
+import CrearEstudiante from "./common/components/Estudiante/CrearEstudianteContainer";
+import Estudiantes from "./common/components/Estudiante/ListadoContainer";
 
 
 
@@ -46,7 +46,7 @@ module.exports = (
                 <Route exact path="/registro" component={Registro} />
                 <ProtectedRoute exact path="/" component={Demo} />
                 <ProtectedRoute exact path="/page2" component={Examples} />
-                <ProtectedRoute exact path="/user-profile" component={Profile} />
+                {/*<ProtectedRoute exact path="/user-profile" component={Profile} />*/}
                 <ProtectedRoute exact path="/grids" component={Grids} />
                 <ProtectedRoute exact path="/notifications" component={Notificaciones} />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
@@ -106,19 +106,19 @@ module.exports = (
                 <ProtectedRoute
                     exact
                     path="/estudiante/create"
-                    component={Profile}
+                    component={CrearEstudiante}
                 />
                 <ProtectedRoute
                     exact
                     path="/estudiante/:id/ver"
-                    component={Profile}
+                    component={CrearEstudiante}
                 />
                 <ProtectedRoute
                     exact
                     path="/estudiante/:id/editar"
-                    component={Profile}
+                    component={CrearEstudiante}
                 />
-                <ProtectedRoute exact path="/estudiantes" component={Usuarios} />
+                <ProtectedRoute exact path="/estudiantes" component={Estudiantes} />
 
                 <Route component={NotFound} />
             </Switch>

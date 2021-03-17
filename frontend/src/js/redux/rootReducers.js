@@ -11,6 +11,7 @@ import nivel from './modules/nivel/nivel'
 import rol from './modules/rol/rol'
 import grado from './modules/grado/grado'
 import usuariosPersonal from "./modules/usuarios/usuariosPersonal";
+import estudiante from "./modules/estudiante/estudiante";
 
 export default combineReducers({
     form: formReducer,
@@ -24,4 +25,5 @@ export default combineReducers({
     grado,
     usuariosPersonal,
     rol,
+    estudiante,
 });

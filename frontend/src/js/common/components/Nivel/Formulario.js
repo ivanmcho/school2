@@ -44,14 +44,14 @@ const SucursalForm = (props) => {
                         {isNested ? (
                             <button
                                 type="button"
-                                className="btn btn-primary mr-1"
+                                className="btn btn-secondary mr-1"
                                 onClick={() => showForm(false)}
                             >
                                 Cancelar
                             </button>
                         ) : (
                             <a
-                                className="btn btn-primary mr-1"
+                                className="btn btn-secondary mr-1"
                                 href="/#/nivel"
                             >
                                 Cancelar
@@ -76,4 +76,10 @@ const SucursalForm = (props) => {
 
 export default reduxForm({
     form: "NivelForm", // a unique identifier for this form
+    validate: (data) => {
+        return validate(data, {
+            nombre: validators.exists()("Este campo es requerido"),
+            
+        });
+    },
 })(SucursalForm);

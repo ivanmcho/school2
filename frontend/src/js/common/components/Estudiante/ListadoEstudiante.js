@@ -80,6 +80,7 @@ class Usuario extends Component {
                             <div className="border-bottom card-header"><h6 className="m-0">Administrar Estudiantes</h6></div>
                             <div className="p-0 px-3 pt-3">
                         <Grid
+                            Stripped
                             data={data}
                             loading={loader}
                             onPageChange={listar}

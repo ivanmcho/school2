@@ -1,23 +1,16 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { renderField } from "../Utils/renderField";
-import { AsyncSelectField } from "../Utils/renderField/renderField";
+import { AsyncSelectField,renderTextArea } from "../Utils/renderField/renderField";
 import { api } from "../../../utility/api";
 // import CreateModal from '../Utils/renderField/createModal';
 
-
-const validate = (values) => {
-    const errors = {};
-    if (!values.nombre) {
-        errors.nombre = "Campo requerido";
-    }
-
-    if (!values.empresa) {
-        errors.empresa = "Campo requerido";
-    }
-
-    return errors;
-};
+import {
+    validate,
+    validatorFromFunction,
+    validators,
+    combine,
+} from "validate-redux-form";
 
 const getNivel = (search) => {
     let niveles = [];
@@ -66,6 +59,7 @@ const GradoForm = (props) => {
                                 name="nivel"
                                 placeholder="Nivel"
                                 component={AsyncSelectField}
+                                className="form-control"
                                 loadOptions={getNivel}
                                 disabled={ver}
                             ></Field>
@@ -85,7 +79,7 @@ const GradoForm = (props) => {
                     <div className="p-0 pt-3">
                         <div className="form-group has-feedback flex-1 mb-4">
                             <label className="txt-12-n color-057">Descripcion</label>
-                            <Field name="descripcion"  component={renderField} disabled={ver}/>
+                            <Field name="descripcion"  component={renderTextArea} disabled={ver}/>
                         </div>
                     </div>
                     <br />
@@ -93,7 +87,7 @@ const GradoForm = (props) => {
                     <div className=" d-flex justify-content-center">
                         {isNested ? null : (
                             <a
-                                className="btn btn-primary mr-1"
+                                className= "btn btn-secondary mr-1"
                                 href="/#/grado"
                             >
                                 Cancelar
@@ -117,5 +111,11 @@ const GradoForm = (props) => {
 
 export default reduxForm({
     form: "GradoForm", // a unique identifier for this form
-    validate,
+    validate: (data) => {
+        return validate(data, {
+            nivel: validators.exists()("Este campo es requerido"),
+            nombre: validators.exists()("Este campo es requerido"),
+            descripcion: validators.exists()("Este campo es requerido"),
+        });
+    },
 })(GradoForm);

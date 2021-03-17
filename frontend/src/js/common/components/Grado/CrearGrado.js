@@ -18,12 +18,8 @@ class CrearGrado extends Component {
     render() {
         const {
             match,
-            
-            crear,
             crearGrado,
-            registrarEmpresa,
             location,
-            valorPro,
         } = this.props;
 
         const funcionEnvio = match.params.id
@@ -40,8 +36,6 @@ class CrearGrado extends Component {
                     funcionRegistro={this.props.funcionEnvio}
                     actualizar={match.params.id ? true : false}
                     ver={location.pathname.includes("ver")}
-                    registrarEmpresa={registrarEmpresa}
-
                 />
             </div>
         );
