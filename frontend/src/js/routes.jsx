@@ -41,7 +41,7 @@ import Catedraticos from "./common/components/Catedratico/ListadoContainer";
 import CrearProfesion from "./common/components/Profesion/CrearProfesionContainer";
 import Profesiones from "./common/components/Profesion/ListadoContainer";
 
-
+import ResetPass from "./common/components/resetPass/ResetPassContainer";
 
 module.exports = (
     <div>
@@ -160,6 +160,9 @@ module.exports = (
                     component={CrearProfesion}
                 />
                 <ProtectedRoute exact path="/profesiones" component={Profesiones} />
+
+                {/* __________Reset_Password________ */}
+                <ProtectedRoute exact path="/resetpass" component={ResetPass} />
 
                 <Route component={NotFound} />
             </Switch>

@@ -105,7 +105,8 @@ class EstudianteViewset(viewsets.ModelViewSet):
                     usuario.address = data.get('user').get('address')
                     usuario.rol=rol
 
-                    usuario.set_password(data.get('user').get('password'))
+                    if(data.get('user').get('password')!='Temporal'):
+                        usuario.set_password(data.get('user').get('password'))
 
                     estudiante = Estudiante.objects.get(user=usuario)
 

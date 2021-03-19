@@ -20,9 +20,10 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'profile',
-            'password'
+            'password',
+            'rol'
         )
-
+        depth = 1
 
 class UserReadSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(required=False)
@@ -37,7 +38,9 @@ class UserReadSerializer(serializers.ModelSerializer):
             'is_staff',
             'email',
             'profile',
+            'rol',
         )
+        depth = 1
 
 class UserRegistroSerializer(serializers.ModelSerializer):
     class Meta:

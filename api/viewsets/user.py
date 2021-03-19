@@ -113,6 +113,23 @@ class UserViewset(viewsets.ModelViewSet):
             return Response({"detail": "{} is a required field".format(str(e))}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(methods=["post"], detail=False)
+    def reset_pass(self, request, *args, **kwargs):
+        data = request.data
+        print(data)
+        try:
+            user = User.objects.get(username=data["username"])
+            if user.check_password(data["passwordActual"]):
+                user.set_password(request.data["password"])
+                user.save()
+
+                return Response({"detail": "Felicidades has cambiado la contraseña"}, status=status.HTTP_200_OK)
+            return Response({"detail": "Password does not match user password"}, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        except KeyError as e:
+            return Response({"detail": "{} is a required field".format(str(e))}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=["post"], detail=False)
     def logout(self, request, *args, **kwargs):
         try:
             token = Token.objects.get(user=request.user)
