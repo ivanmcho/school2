@@ -152,7 +152,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-SENDGRID_API_KEY = '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'
+SENDGRID_API_KEY = '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'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 

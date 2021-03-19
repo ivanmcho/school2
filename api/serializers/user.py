@@ -2,6 +2,9 @@ from rest_framework import serializers
 from api.models.m_users import User
 from api.models import Profile, Estudiante
 
+import jwt
+from rest_framework.settings import api_settings
+from django.conf import settings
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,3 +57,31 @@ class UserRegistroSerializer(serializers.ModelSerializer):
             'phone',
             'rol',
         )
+
+class UserAccountVerificationSerializer(serializers.Serializer):
+    """User Account verification by token
+    """
+    token = serializers.CharField()
+
+    def validate_token(self, data):
+        """Validate token
+        here we validate that the token is correct and it is valid
+        """
+        try:
+            payload = jwt.decode(data, settings.SECRET_KEY,
+                                 algorithms=['HS256'])
+        except jwt.ExpiredSignature:
+            raise serializers.ValidationError('verification link has expired')
+        except jwt.PyJWTError:
+            raise serializers.ValidationError('Invalid Token')
+        if payload['type'] != 'email_confirmation':
+            raise serializers.ValidationError('Invalid Token')
+
+        self.context['payload'] = payload
+
+    def save(self):
+        """Update the verification status in user"""
+        payload = self.context['payload']
+        user = User.objects.get(username=payload['user'])
+        user.is_verify = True
+        user.save()

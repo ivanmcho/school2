@@ -43,10 +43,17 @@ import Profesiones from "./common/components/Profesion/ListadoContainer";
 
 import ResetPass from "./common/components/resetPass/ResetPassContainer";
 
+import VerificationEmail from "./common/components/LoginRegister/VerificationEmail/VerificationContainer";
+
 module.exports = (
     <div>
         <div className="container__content">
             <Switch>
+                <Route
+                    exact
+                    path="/verification/:token"
+                    component={VerificationEmail}
+                />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registro" component={Registro} />
                 <ProtectedRoute exact path="/" component={Demo} />

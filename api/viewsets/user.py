@@ -10,9 +10,18 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from api.models import Profile
-from api.serializers import UserSerializer, UserReadSerializer
+from django.conf import settings
 
+from api.models import Profile
+from api.serializers import UserSerializer, UserReadSerializer, UserAccountVerificationSerializer
+
+from django.template.loader import render_to_string
+from datetime import timedelta
+from django.utils import timezone
+import jwt
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.filter(is_active=True)
@@ -45,6 +54,7 @@ class UserViewset(viewsets.ModelViewSet):
         usuario = User.objects.get(username=request.data["username"])
         usuario.set_password(request.data["password"])
         usuario.save()
+        self.sending_emial(usuario, True) #Activar para poder enviar email
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
@@ -56,6 +66,40 @@ class UserViewset(viewsets.ModelViewSet):
             return {'Location': str(data[api_settings.URL_FIELD_NAME])}
         except (TypeError, KeyError):
             return {}
+
+    def sending_emial(self, user, cambiar):
+        """functions that sends the email verification"""
+        token = self.generate_token(user)
+        link = "http://localhost:8080/#/verification/"+token
+
+        message = Mail(
+            from_email='ivanmcho@gmail.com',
+            to_emails='mhvelasquezm@gmail.com',
+            # to_emails='arlexcaalr@gmail.com',
+            subject=f'Bienvenido {user.first_name} {user.last_name} a CianCoders',
+            html_content='<strong>and easy to do anywhere, even with Python</strong>'
+            )
+        try:
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print("Error")
+            print(e)
+
+    def generate_token(self, user):
+        """Function to generate the token"""
+
+        exp_date = timezone.now() + timedelta(days=3)
+        payload = {
+            'user': user.username,
+            'exp': int(exp_date.timestamp()),
+            'type': 'email_confirmation'
+        }
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+        return token.decode()
 
     @action(methods=["put"], detail=False)
     def update_me(self, request, *args, **kwargs):
@@ -128,6 +172,17 @@ class UserViewset(viewsets.ModelViewSet):
             return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
             return Response({"detail": "{} is a required field".format(str(e))}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'])
+    def verification(self, request):
+        """handle the request of email verification"""
+        serializer = UserAccountVerificationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        data = {
+            "message": "Congratulations your account is verified, please login"
+        }
+        return Response(data=data, status=status.HTTP_200_OK)
 
     @action(methods=["post"], detail=False)
     def logout(self, request, *args, **kwargs):

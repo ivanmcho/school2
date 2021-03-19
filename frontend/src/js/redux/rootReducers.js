@@ -16,6 +16,7 @@ import profesion from "./modules/profesion/profesion";
 import catedratico from "./modules/catedratico/catedratico";
 
 import resetPass from "./modules/resetPass/resetpass";
+import verificationEmail from "./modules/verificationEmail/verificationEmail";
 
 
 export default combineReducers({
@@ -34,4 +35,5 @@ export default combineReducers({
     profesion,
     catedratico,
     resetPass,
+    verificationEmail,
 });
