@@ -35,6 +35,9 @@ import Grado from "./common/components/Grado/ListadoContainer";
 import CrearEstudiante from "./common/components/Estudiante/CrearEstudianteContainer";
 import Estudiantes from "./common/components/Estudiante/ListadoContainer";
 
+import CrearCatedratico from "./common/components/Catedratico/CrearCatedraticoContainer";
+import Catedraticos from "./common/components/Catedratico/ListadoContainer";
+
 import CrearProfesion from "./common/components/Profesion/CrearProfesionContainer";
 import Profesiones from "./common/components/Profesion/ListadoContainer";
 
@@ -121,6 +124,24 @@ module.exports = (
                     component={CrearEstudiante}
                 />
                 <ProtectedRoute exact path="/estudiantes" component={Estudiantes} />
+
+                {/* ____________Catedratico________ */}
+                <ProtectedRoute
+                    exact
+                    path="/catedratico/create"
+                    component={CrearCatedratico}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/catedratico/:id/ver"
+                    component={CrearCatedratico}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/catedratico/:id/editar"
+                    component={CrearCatedratico}
+                />
+                <ProtectedRoute exact path="/catedraticos" component={Catedraticos} />
 
                 {/* __________Profesion________ */}
                 <ProtectedRoute

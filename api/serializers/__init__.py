@@ -1,6 +1,6 @@
 from .user import UserSerializer, UserReadSerializer, UserRegistroSerializer
 from .asignacion import AsignacionRegistroSerializer, AsignacionSerializer
-from .catedratico import CatedraticoRegistroSerializer, CatedraticoSerializer
+from .catedratico import CatedraticoRegistroSerializer, CatedraticoReadSerializer
 from .cicloEscolar import CicloEscolarRegistroSerializer, CicloEscolarSerializer
 from .curso import CursoRegistroSerializer, CursoSerializer
 from .estudiante import EstudianteRegistroSerializer, EstudianteSerializer, EstudianteReadSerializer

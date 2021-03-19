@@ -6,9 +6,6 @@ import { NotificationManager } from "react-notifications";
 import { push } from "react-router-redux/lib/actions";
 
 
-const SET_EMPRESA = "SET_EMPRESA";
-const SHOW_FORM = "SHOW_FORM";
-
 const baseReducer = createReducer(
     "grado", //identificador dentro del store.
     "grado", //endpoint donde realizará las peticiones.
@@ -63,24 +60,11 @@ const editarGrado = (id, data) => (dispatch) => {
 
 export const reducers = {
     ...baseReducer.reducers,
-    [SET_EMPRESA]: (state, { empresa }) => {
-        return {
-            ...state,
-            empresa,
-        };
-    },
-    // [SHOW_FORM]: (state, { show_form }) => {
-    //     return {
-    //         ...state,
-    //         show_form,
-    //     };
-    // },
+
 };
 
 export const actions = {
-    //registrarProyecto,
-    //registrarEmpresa,
-    // showForm,
+
     crearGrado,
     leerGrado,
     editarGrado,
@@ -88,10 +72,6 @@ export const actions = {
 };
 
 export const initialState = {
-    empresa: null,
-    proyecto: null,
-    
-    // show_form: false,
     ...baseReducer.initialState,
 };
 

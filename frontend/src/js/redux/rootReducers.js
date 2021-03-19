@@ -13,6 +13,8 @@ import grado from './modules/grado/grado'
 import usuariosPersonal from "./modules/usuarios/usuariosPersonal";
 import estudiante from "./modules/estudiante/estudiante";
 import profesion from "./modules/profesion/profesion";
+import catedratico from "./modules/catedratico/catedratico";
+
 
 export default combineReducers({
     form: formReducer,
@@ -28,4 +30,5 @@ export default combineReducers({
     rol,
     estudiante,
     profesion,
+    catedratico,
 });

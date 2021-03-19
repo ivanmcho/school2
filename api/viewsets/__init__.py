@@ -4,3 +4,4 @@ from .grado import GradoViewset
 from .estudiante import EstudianteViewset
 from .rol import RolViewset
 from .profesion import ProfesionViewset
+from .catedratico import CatedraticoteViewset
