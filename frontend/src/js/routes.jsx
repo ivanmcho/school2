@@ -9,6 +9,8 @@ import { NotificationContainer } from 'react-notifications';
 import {Login,  Registro} from './common/components/LoginRegister';
 import Demo from './common/components/Demo/Demo';
 import ProtectedRoute from './ProtectedRoute';
+import ProtectedEstudent from './ProtectedEstudent';
+import ProtectedTeacher from './ProtectedTeacher';
 import Examples from './common/components/Examples/Basic';
 import NotFound from './common/components/layout/NotFound/NotFound';
 
@@ -29,6 +31,12 @@ import Nivel from "./common/components/Nivel/ListadoContainer";
 import CrearRol from "./common/components/Rol/CrearRolContainer";
 import Rol from "./common/components/Rol/ListadoContainer";
 
+import CrearSeccion from "./common/components/Seccion/CrearSeccionContainer";
+import Secciones from "./common/components/Seccion/ListadoContainer";
+
+import CrearCurso from "./common/components/Curso/CrearCursoContainer";
+import Cursos from "./common/components/Curso/ListadoContainer";
+
 import CrearGrado from "./common/components/Grado/CrearGradoContainer";
 import Grado from "./common/components/Grado/ListadoContainer";
 
@@ -40,6 +48,9 @@ import Catedraticos from "./common/components/Catedratico/ListadoContainer";
 
 import CrearProfesion from "./common/components/Profesion/CrearProfesionContainer";
 import Profesiones from "./common/components/Profesion/ListadoContainer";
+
+import CrearAsignacion from "./common/components/Asignacion/CrearAsignacionContainer";
+import Asignaciones from "./common/components/Asignacion/ListadoContainer";
 
 import ResetPass from "./common/components/resetPass/ResetPassContainer";
 
@@ -59,8 +70,8 @@ module.exports = (
                 <ProtectedRoute exact path="/" component={Demo} />
                 <ProtectedRoute exact path="/page2" component={Examples} />
                 {/*<ProtectedRoute exact path="/user-profile" component={Profile} />*/}
-                <ProtectedRoute exact path="/grids" component={Grids} />
-                <ProtectedRoute exact path="/notifications" component={Notificaciones} />
+                <ProtectedEstudent exact path="/grids" component={Grids} />
+                <ProtectedTeacher exact path="/notifications" component={Notificaciones} />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
 
                 {/* __________________Nivel_____ */}
@@ -167,6 +178,59 @@ module.exports = (
                     component={CrearProfesion}
                 />
                 <ProtectedRoute exact path="/profesiones" component={Profesiones} />
+
+                {/* __________Asignacion________ */}
+                <ProtectedRoute
+                    exact
+                    path="/asignacion/create"
+                    component={CrearAsignacion}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/asignaicon/:id/ver"
+                    component={CrearAsignacion}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/asignacion/:id/editar"
+                    component={CrearAsignacion}
+                />
+                <ProtectedRoute exact path="/asignaciones" component={Asignaciones} />
+                {/* __________Seccion________ */}
+                <ProtectedRoute
+                    exact
+                    path="/seccion/create"
+                    component={CrearSeccion}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/seccion/:id/ver"
+                    component={CrearSeccion}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/seccion/:id/editar"
+                    component={CrearSeccion}
+                />
+                <ProtectedRoute exact path="/secciones" component={Secciones} />
+
+                {/* __________Curso________ */}
+                <ProtectedRoute
+                    exact
+                    path="/curso/create"
+                    component={CrearCurso}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/curso/:id/ver"
+                    component={CrearCurso}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/curso/:id/editar"
+                    component={CrearCurso}
+                />
+                <ProtectedRoute exact path="/cursos" component={Cursos} />
 
                 {/* __________Reset_Password________ */}
                 <ProtectedRoute exact path="/resetpass" component={ResetPass} />

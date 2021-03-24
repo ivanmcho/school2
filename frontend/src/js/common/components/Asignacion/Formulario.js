@@ -35,7 +35,7 @@ const getProfesion = (search) => {
             return [];
         });
 };
-const CatedraticoForm = (props) => {
+const AsignacionForm = (props) => {
     const { handleSubmit, me, actualizar, ver, setAvatar, isNested } = props;
     let styleForm='p-0 pt-3 d-flex flex-column flex-md-row'
     let styleHeader = 'mb-4 card card-small'
@@ -52,11 +52,11 @@ const CatedraticoForm = (props) => {
                 { isNested? (setStyle('card card-small w-100')):<br></br>}
                 <div className={ styleHeader} style={{minWidth:'500px'}}>
                     <div className="border-bottom card-header m-1">
-                        { isNested? <h5 className="m-0 p-0 color-003"><strong>Agregar Catedratico</strong></h5>:
+                        { isNested? <h5 className="m-0 p-0 color-003"><strong>Agregar Asigacion</strong></h5>:
                         <h3 className="m-0 txt-22-n color-003">
-                            { actualizar && !ver? "Actualizar Catedratico": null}
-                            { !actualizar && !ver? "Agregar Catedratico": null}
-                            { actualizar && ver? "Ver Catedratico": null}
+                            { actualizar && !ver? "Actualizar Asigacion": null}
+                            { !actualizar && !ver? "Agregar Asigacion": null}
+                            { actualizar && ver? "Ver Asigacion": null}
                         </h3>}
                     </div>
                     { isNested? ()=>(styleForm='p-0 m-0 d-flex flex-column flex-md-row'):null }
@@ -67,14 +67,14 @@ const CatedraticoForm = (props) => {
                                     className="txt-12-n color-057"
                                     htmlFor="username"
                                 >
-                                    Correo
+                                    Ciclo Escolar
                                 </label>
                                 <Field
-                                    name="username"
-                                    placeholder="E-mail"
-                                    component={renderField}
-                                    type="email"
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
                                     className="form-control"
+                                    loadOptions={getProfesion}
                                     disabled={ver}
                                 />
                             </div>
@@ -83,14 +83,14 @@ const CatedraticoForm = (props) => {
                                     className="txt-12-n color-057"
                                     htmlFor="first_name"
                                 >
-                                    Nombre
+                                    Grado
                                 </label>
                                 <Field
-                                    name="first_name"
-                                    placeholder="Nombre"
-                                    component={renderField}
-                                    type="text"
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
                                     className="form-control"
+                                    loadOptions={getProfesion}
                                     disabled={ver}
                                 />
                             </div>
@@ -100,14 +100,14 @@ const CatedraticoForm = (props) => {
                                     className="txt-12-n color-057"
                                     htmlFor="last_name"
                                 >
-                                    Apellido
+                                    Seccion
                                 </label>
                                 <Field
-                                    name="last_name"
-                                    placeholder="Apellido"
-                                    component={renderField}
-                                    type="text"
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
                                     className="form-control"
+                                    loadOptions={getProfesion}
                                     disabled={ver}
                                 />
                             </div>
@@ -115,56 +115,73 @@ const CatedraticoForm = (props) => {
                         </div>
                         <div className="d-flex flex-column flex-1 mx-3">
                             <div className="form-group has-feedback flex-1 mx-3">
-                                        <label
-                                            className="txt-12-n color-057"
-                                            htmlFor="address"
-                                        >
-                                            Direccion
-                                        </label>
-                                        <Field
-                                            name="address"
-                                            placeholder="Direccion"
-                                            component={renderTextArea}
-                                            type="text"
-                                            className="form-control"
-                                            disabled={ver}
-                                        />
-                                </div>
-                                <div className="form-group has-feedback flex-1 mx-3">
-                                        <label
-                                            className="txt-12-n color-057"
-                                            htmlFor="first_name"
-                                        >
-                                            Telefono
-                                        </label>
-                                        <Field
-                                            name="phone"
-                                            type="text"
-                                            className="form-control"
-                                            disabled={ver}
-                                            decimalScale={2}
-                                            numberFormat={"+(502) ####-####"}
-                                            prefix="Q "
-                                            placeholder="#### ####"
-                                            component={renderNumber}
-                                        />
-                                </div>
-                                <div className="form-group has-feedback flex-1 mx-3">
-                                        <label
-                                            className="txt-12-n color-057"
-                                            htmlFor="first_name"
-                                        >
-                                            Profesion
-                                        </label>
-                                        <Field
-                                            name="profesion"
-                                            placeholder="Profesion"
-                                            component={AsyncSelectField}
-                                            className="form-control"
-                                            loadOptions={getProfesion}
-                                            disabled={ver}
-                                        ></Field>
-                                </div>
+                                <label
+                                    className="txt-12-n color-057"
+                                    htmlFor="address"
+                                >
+                                    Curso
+                                </label>
+                                <Field
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
+                                    className="form-control"
+                                    loadOptions={getProfesion}
+                                    disabled={ver}
+                                />
+                            </div>
+                            <div className="form-group has-feedback flex-1 mx-3">
+                                <label
+                                    className="txt-12-n color-057"
+                                    htmlFor="first_name"
+                                >
+                                    Profesor
+                                </label>
+                                <Field
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
+                                    className="form-control"
+                                    loadOptions={getProfesion}
+                                    disabled={ver}
+                                />
+                            </div>
+                            <div className="form-group has-feedback flex-1 mx-3">
+                                <label
+                                    className="txt-12-n color-057"
+                                    htmlFor="first_name"
+                                >
+                                    Descripcion
+                                </label>
+                                <Field
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
+                                    className="form-control"
+                                    loadOptions={getProfesion}
+                                    disabled={ver}
+                                />
+                            </div>
+                            
+                        </div>
+                        <div className="d-flex flex-column flex-1 mx-3">
+                            <div className="form-group has-feedback flex-1 mx-3">
+                                <label
+                                    className="txt-12-n color-057"
+                                    htmlFor="address"
+                                >
+                                    Direccion
+                                </label>
+                                <Field
+                                    name="profesion"
+                                    placeholder="Profesion"
+                                    component={AsyncSelectField}
+                                    className="form-control"
+                                    loadOptions={getProfesion}
+                                    disabled={ver}
+                                />
+                            </div>
+                            
                         </div>
                         
                     </div>
@@ -174,7 +191,7 @@ const CatedraticoForm = (props) => {
                    
                         <a 
                         className = "btn btn-secondary mr-1"
-                        href="/#/catedraticos" >Regresar </a>
+                        href="/#/asignaciones" >Regresar </a>
 
                         {!ver && (
                             <button
@@ -193,7 +210,7 @@ const CatedraticoForm = (props) => {
 };
 
 export default reduxForm({
-    form: "CatedraticoForm", // a unique identifier for this form
+    form: "AsignacionForm", // a unique identifier for this form
     validate: (data) => {
         return validate(data, {
             first_name: validators.exists()("Este campo es requerido"),
@@ -201,4 +218,4 @@ export default reduxForm({
             last_name: validators.exists()("Este campo es requerido"),
         });
     },
-} )( CatedraticoForm );
+} )( AsignacionForm );

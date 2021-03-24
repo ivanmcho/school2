@@ -35,6 +35,7 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
     api.post('user/token', data).then((response) => {
         localStorage.setItem('token', response.token);
         dispatch(initializeForm('profile', response.user));
+        console.log("imprimiendo rol", response.user.rol.nombre);
         dispatch(setMe(response.user));
         dispatch(push("/"));
     }).catch(() => {

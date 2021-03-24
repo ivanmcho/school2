@@ -33,10 +33,10 @@ const setPage = (page) => ({
 
 // Este es el redux que se utiliza con profile2
 export const listar = (page = 1) => (dispatch, getStore) => {
-    const resource = getStore().usuariosPersonal;
+    const resource = getStore().estudiante;
     const params = { page };
     params.search = resource.search;
-    console.log("UUUUU", resource);
+    console.log("Login me", getStore().login.me.rol.nombre);
     dispatch({ type: SET_LOADER, loader: true });
     api.get("estudiante", params)
         .then((response) => {
@@ -124,7 +124,7 @@ export const registrarUser = (data) => (dispatch, getStore) => {
                 last_name: data.last_name,
                 phone: data.phone,
                 address: data.address,
-                rol: 1,
+                rol: 2,
                 password: "Temporal",
             }
         
