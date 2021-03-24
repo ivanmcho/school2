@@ -12,7 +12,7 @@ from api.serializers import CursoRegistroSerializer, CursoSerializer
 from django.db import transaction
 from copy import deepcopy
 
-class SeccionViewset(viewsets.ModelViewSet):
+class CursoViewset(viewsets.ModelViewSet):
     queryset = Curso.objects.filter(activo=True)
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)

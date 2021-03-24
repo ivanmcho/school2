@@ -5,3 +5,5 @@ from .estudiante import EstudianteViewset
 from .rol import RolViewset
 from .profesion import ProfesionViewset
 from .catedratico import CatedraticoteViewset
+from .seccion import SeccionViewset
+from .curso import CursoViewset
