@@ -24,7 +24,7 @@ class Usuario extends Component {
             listar,
             page,
         } = this.props;
-        console.log("page: ", page);
+        console.log("DATA EN LISTA ", data);
         return (
             <div className="d-flex flex-column w-100 px-3">
                 <div className="page-header pl-1 pt-3 no-gutters row">
@@ -42,16 +42,16 @@ class Usuario extends Component {
                             }}
                             className="txt-12"
                         >
-                            Usuarios
+                            Asignaciones
                         </div>
                     </div>
                 </div>
 
                     <div className="d-flex flex-wrap mb-2  mt-4">
-                        <h3 className="txt-22-n color-003 w-50">Catedraticos</h3>
+                        <h3 className="txt-22-n color-003 w-50">Asignacion</h3>
                         <div className="d-flex flex-row justify-content-between align-items-center flex-fill ">
-                            <a className="btn btn-secondary mr-1" href="/#/catedratico/create">
-                                Agregar Catedraticos
+                            <a className="btn btn-secondary mr-1" href="/#/asignacion/create">
+                                Agregar Asignacion
                             </a>
                             <div className="flex-fill d-flex align-items-center ml-3">
                                 <input
@@ -77,11 +77,11 @@ class Usuario extends Component {
                     </div>
                     <div className="mb-4 col-12">
                         <div className="mb-4 card card-small">
-                            <div className="border-bottom card-header"><h6 className="m-0">Administrar Catedraticos</h6></div>
+                            <div className="border-bottom card-header"><h6 className="m-0">Administrar Asignaciones</h6></div>
                             <div className="p-0 px-3 pt-3">
                         <Grid
                             Stripped
-                            data={data}
+                            data={data ? data: null}
                             loading={loader}
                             onPageChange={listar}
                             onSortChange={onSortChange}
@@ -89,35 +89,50 @@ class Usuario extends Component {
                         >
                             
                             <TableHeaderColumn
-                                dataField="user"
+                                dataField="ciclo_escolar"
                                 dataSort
                                 dataFormat={(cell) => {
-                                    return cell.username;
+                                    return cell.anio;
                                 }}
                             >
-                                Username
+                                Ciclo Escolar
                             </TableHeaderColumn>
                             <TableHeaderColumn
-                                dataField="user"
+                                dataField="catedratico"
                                 dataSort
                                 dataFormat={(cell) => {
-                                    return cell.first_name;
+                                    return cell.user.last_name;
                                 }}
                             >
-                                Nombre
+                                Catedratico
                             </TableHeaderColumn>
 
                             <TableHeaderColumn
-                                dataField="user"
+                                dataField="curso"
                                 dataSort
                                 dataFormat={(cell) => {
-                                    return cell.phone;
+                                    return cell.nombre;
                                 }}
                             >
-                                Telefóno
+                                Curso
                             </TableHeaderColumn>
-                            <TableHeaderColumn dataField="activo" dataSort>
-                                Activo
+                            <TableHeaderColumn
+                                dataField="grado"
+                                dataSort
+                                dataFormat={(cell) => {
+                                    return cell.nombre;
+                                }}
+                            >
+                                Grado
+                            </TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="seccion"
+                                dataSort
+                                dataFormat={(cell) => {
+                                    return cell.nombre;
+                                }}
+                            >
+                                Seccion
                             </TableHeaderColumn>
                             <TableHeaderColumn
                                 isKey
@@ -127,8 +142,8 @@ class Usuario extends Component {
                                 dataAlign="center"
                                 dataSort
                                 dataFormat={standardActions({
-                                    leer: "catedratico",
-                                    editar: "catedratico",
+                                    leer: "asignacion",
+                                    editar: "asignacion",
                                     // editar2: "#",
                                     eliminar,
                                 })}

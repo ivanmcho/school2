@@ -17,6 +17,7 @@ import profesion from "./modules/profesion/profesion";
 import catedratico from "./modules/catedratico/catedratico";
 import asignacion from "./modules/asignacion/asignacion";
 import curso from "./modules/curso/curso";
+import ciclo from "./modules/ciclo/ciclo";
 
 import resetPass from "./modules/resetPass/resetpass";
 import verificationEmail from "./modules/verificationEmail/verificationEmail";
@@ -40,6 +41,7 @@ export default combineReducers({
     asignacion,
     seccion,
     curso,
+    ciclo,
     resetPass,
     verificationEmail,
 });

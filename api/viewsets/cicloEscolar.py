@@ -12,7 +12,7 @@ from api.serializers import CicloEscolarRegistroSerializer, CicloEscolarSerializ
 from django.db import transaction
 from copy import deepcopy
 
-class SeccionViewset(viewsets.ModelViewSet):
+class CicloEscolarViewset(viewsets.ModelViewSet):
     queryset = CicloEscolar.objects.filter(activo=True)
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)

@@ -15,6 +15,8 @@ router.register(r'profesion', viewsets.ProfesionViewset)
 router.register(r'catedratico', viewsets.CatedraticoteViewset)
 router.register(r'seccion', viewsets.SeccionViewset)
 router.register(r'curso', viewsets.CursoViewset)
+router.register(r'ciclo', viewsets.CicloEscolarViewset)
+router.register(r'asignacion', viewsets.AsignacionViewset)
 
 
 urlpatterns = [

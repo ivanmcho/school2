@@ -28,6 +28,9 @@ require('../style/index.css');
 import CrearNivel from "./common/components/Nivel/CrearNivelContainer";
 import Nivel from "./common/components/Nivel/ListadoContainer";
 
+import CrearCiclo from "./common/components/Ciclo/CrearCicloContainer";
+import Ciclos from "./common/components/Ciclo/ListadoContainer";
+
 import CrearRol from "./common/components/Rol/CrearRolContainer";
 import Rol from "./common/components/Rol/ListadoContainer";
 
@@ -70,8 +73,8 @@ module.exports = (
                 <ProtectedRoute exact path="/" component={Demo} />
                 <ProtectedRoute exact path="/page2" component={Examples} />
                 {/*<ProtectedRoute exact path="/user-profile" component={Profile} />*/}
-                <ProtectedEstudent exact path="/grids" component={Grids} />
-                <ProtectedTeacher exact path="/notifications" component={Notificaciones} />
+                <ProtectedRoute exact path="/grids" component={Grids} />
+                <ProtectedRoute exact path="/notifications" component={Notificaciones} />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
 
                 {/* __________________Nivel_____ */}
@@ -187,7 +190,7 @@ module.exports = (
                 />
                 <ProtectedRoute
                     exact
-                    path="/asignaicon/:id/ver"
+                    path="/asignacion/:id/ver"
                     component={CrearAsignacion}
                 />
                 <ProtectedRoute
@@ -231,6 +234,23 @@ module.exports = (
                     component={CrearCurso}
                 />
                 <ProtectedRoute exact path="/cursos" component={Cursos} />
+                {/* __________Curso________ */}
+                <ProtectedRoute
+                    exact
+                    path="/ciclo/create"
+                    component={CrearCiclo}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/ciclo/:id/ver"
+                    component={CrearCiclo}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/ciclo/:id/editar"
+                    component={CrearCiclo}
+                />
+                <ProtectedRoute exact path="/ciclos" component={Ciclos} />
 
                 {/* __________Reset_Password________ */}
                 <ProtectedRoute exact path="/resetpass" component={ResetPass} />

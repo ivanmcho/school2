@@ -15,6 +15,7 @@ class AsignacionSerializer(serializers.ModelSerializer):
                 'imagen_portada',
                 'descripcion',
             )
+        depth = 2  
 
 
 class AsignacionRegistroSerializer(serializers.ModelSerializer):
@@ -26,6 +27,5 @@ class AsignacionRegistroSerializer(serializers.ModelSerializer):
                 'seccion',
                 'curso',
                 'catedratico',
-                'imagen_portada',
                 'descripcion',
             )

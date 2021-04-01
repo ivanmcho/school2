@@ -11,6 +11,9 @@ const SET_REGISTRO = "SET_REGISTRO";
 const SEARCH_USERS = "SEARCH_USERS";
 const PAGE = "VIEW_PAGE";
 const SHOW_FORM = "SHOW_FORM";
+const GUARDAR_LISTADO_TAREAS = 'GUARDAR_LISTADO_TAREAS';
+const GUARDAR_REGISTRO_TAREA = 'GUARDAR_REGISTRO_TAREA';
+const GUARDAR_ARCHIVO = 'GUARDAR_ARCHIVO';
 
 // ------------------------------------
 // Constants
@@ -33,16 +36,17 @@ const setPage = (page) => ({
 
 // Este es el redux que se utiliza con profile2
 export const listar = (page = 1) => (dispatch, getStore) => {
-    const resource = getStore().catedratico;
+    const resource = getStore().asignacion;
     const params = { page };
     params.search = resource.search;
-    console.log("UUUUU", resource);
+    console.log("Antes", getStore());
     dispatch({ type: SET_LOADER, loader: true });
-    api.get("catedratico", params)
+    api.get("asignacion", params)
         .then((response) => {
-            console.log("response", response);
+            
             dispatch( { type: SET_DATA, data: response } );
             dispatch(setPage(page));
+            console.log("Despues", getStore());
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -53,18 +57,19 @@ export const listar = (page = 1) => (dispatch, getStore) => {
 };
 
 
-const leerCatedratico = id => (dispatch) => {
-    api.get(`catedratico/${id}`).then((response) => {
-        console.log("catedratico ", response)
-        response.username = response.user.username;
-        response.address = response.user.address;
-        response.first_name = response.user.first_name;
-        response.last_name = response.user.last_name;
-        response.phone = response.user.phone;
-        response.profesion = {value:response.profesion.id, label: response.profesion.nombre}   
-        console.log("EEEE ",response)
-        //address y phone
-        dispatch(initializeForm("CatedraticoForm", response));
+export const leer = id => (dispatch) => {
+    api.get(`asignacion/${id}`).then((response) => {
+        console.log("asignacion ", response)
+        response.catedratico = {value:response.catedratico.id, label: response.catedratico.user.first_name};
+        response.ciclo_escolar = {value:response.ciclo_escolar.id, label: response.ciclo_escolar.anio};
+        response.curso = {value:response.curso.id, label: response.curso.nombre};
+        response.seccion = {value:response.seccion.id, label: response.seccion.nombre};
+        response.grado = {value:response.grado.id, label: response.grado.nombre};
+        
+        response.descripcion = response.descripcion;
+        dispatch( { type: GUARDAR_ARCHIVO, archivo: response.imagen_portada} );
+        console.log("ARCHIVOOO: ", response.imagen_portada);
+        dispatch(initializeForm("AsignacionForm", response));
     }).catch(() => {
     }).finally(() => {
     });
@@ -108,28 +113,22 @@ export const editar = (id, data) => (dispatch, getStore) => {
         });
 };
 
-export const registrarUser = (data) => (dispatch, getStore) => {
+export const registrar = (data={}, attachments=[]) => (dispatch, getStore) => {
     const estado = getStore();
+    console.log('Data: ', data)
+    console.log('Attachmentes: ', attachments)
     const formData = {
-        
-            
-            profesion: data.profesion.value,
-            user:{
-                username: data.username,
-                first_name: data.first_name,
-                last_name: data.last_name,
-                phone: data.phone,
-                address: data.address,
-                rol: 1,
-                password: "Temporal",
-            }
-        
+            ciclo_escolar: data.ciclo_escolar.value,
+            grado: data.grado.value,
+            seccion: data.seccion.value,
+            curso: data.curso.value,
+            catedratico: data.catedratico.value,
+            descripcion: data.descripcion
     }
 
-    // formData.idCategoria = formData.idCategoria.value;
     console.log("estado: ", estado);
     console.log("FormDataRegistrar: ", formData);
-    api.post("catedratico", formData)
+    api.postAttachments("asignacion", formData, attachments)
         .then((response) => {
             NotificationManager.success(
                 "Usaurio registrado correctamente",
@@ -141,7 +140,7 @@ export const registrarUser = (data) => (dispatch, getStore) => {
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
         })
-        .finally(() => {});
+        .finally(() => {}); 
 };
 
 
@@ -150,19 +149,35 @@ const searchChange = (search) => (dispatch) => {
     dispatch(listar());
 };
 
+const eliminar = id => (dispatch) => {
+    dispatch(setLoader(true));
+    api.eliminar(`asignacion/${id}`).then(() => {
+        dispatch(listar());
+        NotificationManager.success('Registro eliminado', 'Éxito', 3000);
+    }).catch(() => {
+        NotificationManager.success('Error en la transacción', 'Éxito', 3000);
+    }).finally(() => {
+        dispatch(setLoader(false));
+    });
+};
+
 const showForm = (show) => (dispatch) => {
     dispatch({ type: SHOW_FORM, show_form: show });
 };
 
-
+const clearFile = () => (dispatch) =>{
+    dispatch( { type: GUARDAR_ARCHIVO, archivo: null} );
+}
 
 export const actions = {
-    registrarUser,
+    registrar,
     listar,
     searchChange,
     editar,
     showForm,
-    leerCatedratico,    
+    leer,
+    eliminar,
+    clearFile,
 };
 
 export const reducers = {
@@ -205,6 +220,12 @@ export const reducers = {
             search,
         };
     },
+    [GUARDAR_ARCHIVO]: (state, { archivo }) => {
+        return {
+            ...state,
+            archivo,
+        };
+    },
 };
 
 export const initialState = {
@@ -215,6 +236,7 @@ export const initialState = {
     data: {},
     registro: null,
     search: "",
+    archivo: null,
 };
 
 

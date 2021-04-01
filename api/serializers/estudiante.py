@@ -43,3 +43,4 @@ class EstudianteReadSerializer(serializers.ModelSerializer):
             'direccion_contacto',
             'telefono_contacto',
         )
+        depth = 1  

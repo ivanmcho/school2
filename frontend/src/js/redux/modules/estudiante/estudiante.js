@@ -5,7 +5,7 @@ import { NotificationManager } from "react-notifications";
 import { api } from "api";
 import _ from "lodash";
 
-const SET_DATA = "SET_DATA";
+const ESTUDIANTE_DATA = "ESTUDIANTE_DATA";
 const SET_LOADER = "SET_LOADER";
 const SET_REGISTRO = "SET_REGISTRO";
 const SEARCH_USERS = "SEARCH_USERS";
@@ -18,6 +18,11 @@ const SHOW_FORM = "SHOW_FORM";
 const setLoader = (loader) => ({
     type: SET_LOADER,
     loader,
+});
+
+const setData = (data) => ({
+    type: ESTUDIANTE_DATA,
+    data,
 });
 
 const setSearch = (search) => ({
@@ -36,13 +41,13 @@ export const listar = (page = 1) => (dispatch, getStore) => {
     const resource = getStore().estudiante;
     const params = { page };
     params.search = resource.search;
-    console.log("Login me", getStore().login.me.rol.nombre);
     dispatch({ type: SET_LOADER, loader: true });
     api.get("estudiante", params)
         .then((response) => {
             console.log("response", response);
-            dispatch( { type: SET_DATA, data: response } );
+            dispatch(setData(response));
             dispatch(setPage(page));
+            console.log("Login me en redux", getStore());
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -53,7 +58,7 @@ export const listar = (page = 1) => (dispatch, getStore) => {
 };
 
 
-const leerEstudiante = id => (dispatch) => {
+export const leerEstudiante = id => (dispatch) => {
     api.get(`estudiante/${id}`).then((response) => {
         console.log("Estdiante ",response.user.username)
         response.username = response.user.username;
@@ -170,7 +175,7 @@ export const actions = {
 };
 
 export const reducers = {
-    [SET_DATA]: (state, { data }) => {
+    [ESTUDIANTE_DATA]: (state, { data }) => {
         return {
             ...state,
             data,
@@ -216,7 +221,10 @@ export const initialState = {
     me: {},
     page:1,
     show_form: false,
-    data: {},
+    data: {
+        results: [],
+        count: 0,
+    },
     registro: null,
     search: "",
 };

@@ -11,7 +11,7 @@ class Asignacion(models.Model):
     seccion = models.ForeignKey(Seccion, on_delete=models.CASCADE, related_name="asignacion_seccion")
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, related_name="asignacion_curso")
     catedratico = models.ForeignKey(Catedratico, on_delete=models.CASCADE, related_name="asignacion_catedratico")
-    imagen_portada = models.ImageField(upload_to='Imagenes', null=True, blank=True)
+    imagen_portada = models.FileField(upload_to='Imagenes', null=True, blank=True)
     descripcion = models.CharField(max_length=250)
 
     activo = models.BooleanField(default=True)

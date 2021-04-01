@@ -5,15 +5,14 @@ import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Cards from './Cards';
 
-
-class Sucursal extends Component {
+class ListadoCiclo extends Component {
     componentWillMount = () => {
         this.props.listar();
     };
 
     render() {
+        console.log("ESTADO: ", this.props);
         const {
             data,
             loader,
@@ -24,8 +23,6 @@ class Sucursal extends Component {
             listar,
             page,
         } = this.props;
-
-        const datos = data.results;
 
         return (
             <div className="d-flex flex-column w-100 px-3">
@@ -44,16 +41,16 @@ class Sucursal extends Component {
                             }}
                             className="txt-12"
                         >
-                            Grado
+                            Ciclos
                         </div>
                     </div>
                 </div>
                 <div className="d-flex flex-wrap mb-2  mt-4">
-                    <h3 className="txt-22-n color-003 w-50">Grados</h3>
+                    <h3 className="txt-22-n color-003 w-50">Ciclos</h3>
 
-                    <div className="d-flex flex-row w-50 align-items-center justify-content-end">
-                        <a className="btn btn-secondary mr-1" href="/#/grado/create">
-                            Agregar grado
+                    <div className="d-flex flex-row justify-content-between align-items-center flex-fill ">
+                        <a className="btn btn-secondary mr-1" href="/#/ciclo/create">
+                            Agregar Ciclo
                         </a>
 
                         <div className="flex-fill d-flex align-items-center ml-3">
@@ -78,62 +75,42 @@ class Sucursal extends Component {
                         </div>
                     </div>
                 </div>
+                
+
                 <div className="mb-4 col-12">
-                    <div className="mb-4 card card-small">
-                        <div className="border-bottom card-header"><h6 className="m-0">Administrar Grados</h6></div>
+                        <div className="mb-4 card card-small">
+                            <div className="border-bottom card-header"><h6 className="m-0">Administrar Ciclos</h6></div>
                             <div className="p-0 px-3 pt-3">
-                                <Grid
-                                    data={data}
-                                    loading={loader}
-                                    onPageChange={listar}
-                                    page={page}
-                                    onSortChange={onSortChange}
+                            <Grid
+                                data={data}
+                                loading={loader}
+                                onPageChange={listar}
+                                onSortChange={onSortChange}
+                                page={page}
+                            >
+                                
+                                <TableHeaderColumn isKey dataField="anio" dataSort>
+                                    Nombre
+                                </TableHeaderColumn>
+                                <TableHeaderColumn
+                                    dataField="id"
+                                    dataAlign="center"
+                                    dataSort
+                                    dataFormat={standardActions({
+                                        editar: "ciclo",
+                                        leer: "ciclo",
+                                        eliminar,
+                                    })}
                                 >
-                                    
-
-                                    <TableHeaderColumn dataField="nombre" dataSort>
-                                        Nombre
-                                    </TableHeaderColumn>
-
-                                    <TableHeaderColumn
-                                        dataField="nivel"
-                                        dataSort
-                                        dataFormat={(cell) => {
-                                            return cell.nombre;
-                                        }} //cell tiene solo el dato de datafiel
-                                        //arrow si contiene todos los datos
-                                    >
-                                        Nivel
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn
-                                        isKey
-                                        dataField="id"
-                                        dataAlign="center"
-                                        dataSort
-                                        dataFormat={standardActions({
-                                            editar: "grado",
-                                            leer: "grado",
-                                            eliminar,
-                                        })}
-                                    >
-                                        Acciones
-                                    </TableHeaderColumn>
-                                </Grid>
+                                    Acciones
+                                </TableHeaderColumn>
+                            </Grid>
                             </div>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                {datos.map((proyecto) => (
-                        <Cards
-                        datos={proyecto}
-                    >   
-                        </Cards>
-                    ))}
-            
-                </div>
             </div>
         );
     }
 }
 
-export default Sucursal;
+export default ListadoCiclo;

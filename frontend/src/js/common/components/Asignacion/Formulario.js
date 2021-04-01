@@ -6,7 +6,7 @@ import {
     validators,
     combine,
 } from "validate-redux-form";
-import { renderField } from "../Utils/renderField";
+
 
 import { api } from "../../../utility/api";
 import {
@@ -17,26 +17,101 @@ import {
     AsyncSelectField
 } from "Utils/renderField/renderField";
 
-const getProfesion = (search) => {
-    let profesiones = [];
-    console.log("Profesiones");
+const getCiclo = (search) => {
+    let ciclos = [];
+    console.log("Ciclos");
     return api
-        .get("profesion", { search })
+        .get("ciclo", { search })
         .then((response) => {
             if (response) {
-                response.results.forEach((profesion) => {
-                    profesiones.push({ value: profesion.id, label: profesion.nombre });
+                response.results.forEach((ciclo) => {
+                    ciclos.push({ value: ciclo.id, label: ciclo.anio });
                 });
             }
-            console.log("Profesiones:", profesiones);
-            return profesiones;
+            console.log("Ciclos:", ciclos);
+            return ciclos;
+        })
+        .catch(() => {
+            return [];
+        });
+};
+const getGrado = (search) => {
+    let grados = [];
+    console.log("Grados");
+    return api
+        .get("grado", { search })
+        .then((response) => {
+            if (response) {
+                response.results.forEach((grado) => {
+                    grados.push({ value: grado.id, label: grado.nombre });
+                });
+            }
+            console.log("grados:", grados);
+            return grados;
+        })
+        .catch(() => {
+            return [];
+        });
+};
+const getSeccion = (search) => {
+    let secciones = [];
+    console.log("Secciones");
+    return api
+        .get("seccion", { search })
+        .then((response) => {
+            if (response) {
+                response.results.forEach((seccion) => {
+                    secciones.push({ value: seccion.id, label: seccion.nombre });
+                });
+            }
+            console.log("Secciones:", secciones);
+            return secciones;
+        })
+        .catch(() => {
+            return [];
+        });
+};
+const getCurso = (search) => {
+    let cursos = [];
+    
+    return api
+        .get("curso", { search })
+        .then((response) => {
+            console.log("response: ", response)
+            if (response) {
+                response.results.forEach((curso) => {
+                    cursos.push({ value: curso.id, label: curso.nombre });
+                });
+            }
+            console.log("cursos:", cursos);
+            return cursos;
+        })
+        .catch(() => {
+            return [];
+        });
+};
+
+const getProfesor = (search) => {
+    let profesores = [];
+    
+    return api
+        .get("catedratico", { search })
+        .then((response) => {
+            console.log("response: ", response)
+            if (response) {
+                response.results.forEach((profesor) => {
+                    profesores.push({ value: profesor.id, label: profesor.user.first_name });
+                });
+            }
+            console.log("cursos:", profesores);
+            return profesores;
         })
         .catch(() => {
             return [];
         });
 };
 const AsignacionForm = (props) => {
-    const { handleSubmit, me, actualizar, ver, setAvatar, isNested } = props;
+    const { handleSubmit, me, actualizar, ver, setArchivo, isNested, archivo } = props;
     let styleForm='p-0 pt-3 d-flex flex-column flex-md-row'
     let styleHeader = 'mb-4 card card-small'
     const setStyle = ( style ) => {
@@ -44,6 +119,8 @@ const AsignacionForm = (props) => {
         styleHeader = style
         
     }
+    
+    console.log('ARCHIVO: ', archivo)
     
     // console.log(props);
     return (
@@ -70,11 +147,11 @@ const AsignacionForm = (props) => {
                                     Ciclo Escolar
                                 </label>
                                 <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
+                                    name="ciclo_escolar"
+                                    placeholder="Ciclo Escolar"
                                     component={AsyncSelectField}
                                     className="form-control"
-                                    loadOptions={getProfesion}
+                                    loadOptions={getCiclo}
                                     disabled={ver}
                                 />
                             </div>
@@ -86,11 +163,11 @@ const AsignacionForm = (props) => {
                                     Grado
                                 </label>
                                 <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
+                                    name="grado"
+                                    placeholder="Grado"
                                     component={AsyncSelectField}
                                     className="form-control"
-                                    loadOptions={getProfesion}
+                                    loadOptions={getGrado}
                                     disabled={ver}
                                 />
                             </div>
@@ -103,11 +180,11 @@ const AsignacionForm = (props) => {
                                     Seccion
                                 </label>
                                 <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
+                                    name="seccion"
+                                    placeholder="Seccion"
                                     component={AsyncSelectField}
                                     className="form-control"
-                                    loadOptions={getProfesion}
+                                    loadOptions={getSeccion}
                                     disabled={ver}
                                 />
                             </div>
@@ -122,11 +199,11 @@ const AsignacionForm = (props) => {
                                     Curso
                                 </label>
                                 <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
+                                    name="curso"
+                                    placeholder="Curso"
                                     component={AsyncSelectField}
                                     className="form-control"
-                                    loadOptions={getProfesion}
+                                    loadOptions={getCurso}
                                     disabled={ver}
                                 />
                             </div>
@@ -138,11 +215,11 @@ const AsignacionForm = (props) => {
                                     Profesor
                                 </label>
                                 <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
+                                    name="catedratico"
+                                    placeholder="Profesor"
                                     component={AsyncSelectField}
                                     className="form-control"
-                                    loadOptions={getProfesion}
+                                    loadOptions={getProfesor}
                                     disabled={ver}
                                 />
                             </div>
@@ -153,14 +230,10 @@ const AsignacionForm = (props) => {
                                 >
                                     Descripcion
                                 </label>
-                                <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
-                                    component={AsyncSelectField}
-                                    className="form-control"
-                                    loadOptions={getProfesion}
-                                    disabled={ver}
-                                />
+                                <Field 
+                                name="descripcion"
+                                component={renderTextArea}   
+                                disabled={ver}/>
                             </div>
                             
                         </div>
@@ -170,16 +243,16 @@ const AsignacionForm = (props) => {
                                     className="txt-12-n color-057"
                                     htmlFor="address"
                                 >
-                                    Direccion
+                                    Portada 
                                 </label>
-                                <Field
-                                    name="profesion"
-                                    placeholder="Profesion"
-                                    component={AsyncSelectField}
-                                    className="form-control"
-                                    loadOptions={getProfesion}
-                                    disabled={ver}
+                                <Field 
+                                    setFile={setArchivo} 
+                                    name="archivo" 
+                                    photo={archivo}
+                                    component={renderFilePicker}
                                 />
+                                
+                                <a href={archivo} target="_blank">Adjunto</a>
                             </div>
                             
                         </div>

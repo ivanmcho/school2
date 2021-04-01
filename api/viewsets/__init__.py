@@ -7,3 +7,5 @@ from .profesion import ProfesionViewset
 from .catedratico import CatedraticoteViewset
 from .seccion import SeccionViewset
 from .curso import CursoViewset
+from .cicloEscolar import CicloEscolarViewset
+from .asignacion import AsignacionViewset

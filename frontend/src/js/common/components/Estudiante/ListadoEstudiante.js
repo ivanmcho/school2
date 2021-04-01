@@ -10,6 +10,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 class Usuario extends Component {
     componentWillMount = () => {
         this.props.listar();
+        console.log("listando")
     };
 
     render() {
@@ -24,7 +25,7 @@ class Usuario extends Component {
             listar,
             page,
         } = this.props;
-        console.log("page: ", page);
+        console.log("page: ", data);
         return (
             <div className="d-flex flex-column w-100 px-3">
                 <div className="page-header pl-1 pt-3 no-gutters row">

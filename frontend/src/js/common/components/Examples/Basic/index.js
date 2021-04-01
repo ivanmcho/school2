@@ -91,6 +91,7 @@ class Examples extends Component {
                         </div>
                         <LoadMasks />
                     </div>
+                    
                     <div className="mb-4 col-lg-4">
                         <div className="mb-4 card card-small">
                             <div className="border-bottom card-header"><h6 className="m-0">Select Form Inputs</h6></div>
@@ -100,7 +101,62 @@ class Examples extends Component {
                             <div className="border-bottom card-header"><h6 className="m-0">Date Type Form Inputs</h6></div>
                             <Date />
                         </div>
+                        <div class="card" >
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
                     </div>
+                    <div className=" col-lg-3">
+                        <div className="mb-4 card card-small">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                        </div>
+                    </div>
+                    <div className=" col-lg-3">
+                        <div className="mb-4 card card-small">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                        </div>
+                    </div>
+                    <div className=" col-lg-3">
+                        <div className="mb-4 card card-small">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                        </div>
+                    </div>
+                    <div className=" col-lg-3">
+                        <div className="mb-4 card card-small">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                        </div>
+                    </div>
+                    ¿
+                                       
                 </div>
             </form>
         );
