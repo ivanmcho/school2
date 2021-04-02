@@ -55,6 +55,14 @@ import Profesiones from "./common/components/Profesion/ListadoContainer";
 import CrearAsignacion from "./common/components/Asignacion/CrearAsignacionContainer";
 import Asignaciones from "./common/components/Asignacion/ListadoContainer";
 
+import CrearVehiculo from "./common/components/Vehiculo/CrearVehiculoContainer";
+import Vehiculos from "./common/components/Vehiculo/ListadoContainer";
+
+import CrearServicio from "./common/components/Servicio/CrearServicioContainer";
+import Servicios from "./common/components/Servicio/ListadoContainer";
+
+import Reporte from "./common/components/Reportes/reporteContainer";
+
 import ResetPass from "./common/components/resetPass/ResetPassContainer";
 
 import VerificationEmail from "./common/components/LoginRegister/VerificationEmail/VerificationContainer";
@@ -251,6 +259,44 @@ module.exports = (
                     component={CrearCiclo}
                 />
                 <ProtectedRoute exact path="/ciclos" component={Ciclos} />
+                {/* __________Vehiculos________ */}
+                <ProtectedRoute
+                    exact
+                    path="/vehiculo/create"
+                    component={CrearVehiculo}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/vehiculo/:id/ver"
+                    component={CrearVehiculo}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/vehiculo/:id/editar"
+                    component={CrearVehiculo}
+                />
+                <ProtectedRoute exact path="/vehiculos" component={Vehiculos} />
+                {/* __________Servicios________ */}
+                <ProtectedRoute
+                    exact
+                    path="/servicio/create"
+                    component={CrearServicio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/servicio/:id/ver"
+                    component={CrearServicio}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/servicio/:id/editar"
+                    component={CrearServicio}
+                />
+                <ProtectedRoute exact path="/servicios" component={Servicios} />
+
+                {/* __________Reporte________ */}
+                <ProtectedRoute exact path="/reporte" component={Reporte} />
+                
 
                 {/* __________Reset_Password________ */}
                 <ProtectedRoute exact path="/resetpass" component={ResetPass} />

@@ -17,6 +17,9 @@ router.register(r'seccion', viewsets.SeccionViewset)
 router.register(r'curso', viewsets.CursoViewset)
 router.register(r'ciclo', viewsets.CicloEscolarViewset)
 router.register(r'asignacion', viewsets.AsignacionViewset)
+router.register(r'vehiculo', viewsets.VehiculoViewset)
+router.register(r'servicio', viewsets.ServicioViewset)
+router.register(r'reporte', viewsets.ReporteView)
 
 
 urlpatterns = [

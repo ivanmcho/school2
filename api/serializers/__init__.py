@@ -1,4 +1,4 @@
-from .user import UserSerializer, UserReadSerializer, UserRegistroSerializer, UserAccountVerificationSerializer
+from .user import UserSerializer, UserReadSerializer, UserRegistroSerializer, UserAccountVerificationSerializer, UserReporteSerializer, UserTTSerializer
 from .asignacion import AsignacionRegistroSerializer, AsignacionSerializer
 from .catedratico import CatedraticoRegistroSerializer, CatedraticoReadSerializer
 from .cicloEscolar import CicloEscolarRegistroSerializer, CicloEscolarSerializer
@@ -13,3 +13,5 @@ from .seccion import SeccionRegistroSerializer, SeccionSerializer
 from .tarea import TareaRegistroSerializer, TareaSerializer
 from .tareaEstudiante import TareaEstudianteRegistroSerializer, TareaEstudianteSerializer
 from .rol import RolRegistroSerializer, RolSerializer
+from .vehiculo import VehiculoRegistroSerializer, VehiculoSerializer
+from .servicio import ServicioRegistroSerializer, ServicioSerializer

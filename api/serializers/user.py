@@ -45,6 +45,21 @@ class UserReadSerializer(serializers.ModelSerializer):
         )
         depth = 1
 
+class UserReporteSerializer(serializers.ModelSerializer):
+    total_vehiculos = serializers.IntegerField(default=0)
+    total_gastado = serializers.FloatField(default=0)
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'total_vehiculos',
+            'total_gastado',
+        )
+class UserTTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
 class UserRegistroSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

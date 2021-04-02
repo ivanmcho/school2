@@ -5,8 +5,8 @@ import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Cards from './Cards';
 
+import {renderCurrency } from "../Utils/renderField/renderField";
 
 class Sucursal extends Component {
     componentWillMount = () => {
@@ -44,16 +44,16 @@ class Sucursal extends Component {
                             }}
                             className="txt-12"
                         >
-                            Grado
+                            Servicio
                         </div>
                     </div>
                 </div>
                 <div className="d-flex flex-wrap mb-2  mt-4">
-                    <h3 className="txt-22-n color-003 w-50">Grados</h3>
+                    <h3 className="txt-22-n color-003 w-50">Servicios</h3>
 
                     <div className="d-flex flex-row w-50 align-items-center justify-content-end">
-                        <a className="btn btn-secondary mr-1" href="/#/grado/create">
-                            Agregar grado
+                        <a className="btn btn-secondary mr-1" href="/#/servicio/create">
+                            Agregar Servicio
                         </a>
 
                         <div className="flex-fill d-flex align-items-center ml-3">
@@ -80,7 +80,7 @@ class Sucursal extends Component {
                 </div>
                 <div className="mb-4 col-12">
                     <div className="mb-4 card card-small">
-                        <div className="border-bottom card-header"><h6 className="m-0">Administrar Grados</h6></div>
+                        <div className="border-bottom card-header"><h6 className="m-0">Administrar Servicios</h6></div>
                             <div className="p-0 px-3 pt-3">
                                 <Grid
                                     data={data}
@@ -96,14 +96,13 @@ class Sucursal extends Component {
                                     </TableHeaderColumn>
 
                                     <TableHeaderColumn
-                                        dataField="nivel"
+                                        dataField="precio"
                                         dataSort
                                         dataFormat={(cell) => {
-                                            return cell.nombre;
-                                        }} //cell tiene solo el dato de datafiel
-                                        //arrow si contiene todos los datos
+                                            return "Q."+ cell;
+                                        }}
                                     >
-                                        Nivel
+                                        Precio
                                     </TableHeaderColumn>
                                     <TableHeaderColumn
                                         isKey
@@ -111,8 +110,8 @@ class Sucursal extends Component {
                                         dataAlign="center"
                                         dataSort
                                         dataFormat={standardActions({
-                                            editar: "grado",
-                                            leer: "grado",
+                                            editar: "servicio",
+                                            leer: "servicio",
                                             eliminar,
                                         })}
                                     >
@@ -121,16 +120,6 @@ class Sucursal extends Component {
                                 </Grid>
                             </div>
                     </div>
-                </div>
-                <div className="row">
-                {datos.map((proyecto) => (
-                        <Cards
-                        key={proyecto.id}
-                        datos={proyecto}
-                    >   
-                        </Cards>
-                    ))}
-            
                 </div>
             </div>
         );

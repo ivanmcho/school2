@@ -14,3 +14,5 @@ from .profesion import Profesion
 from .seccion import Seccion
 from .tarea import Tarea
 from .tareaEstudiante import TareaEstudiante
+from .vehiculo import Vehiculo
+from .servicio import Servicio

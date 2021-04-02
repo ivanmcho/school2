@@ -19,6 +19,10 @@ import asignacion from "./modules/asignacion/asignacion";
 import curso from "./modules/curso/curso";
 import ciclo from "./modules/ciclo/ciclo";
 
+import vehiculo from "./modules/vehiculo/vehiculo";
+import servicio from "./modules/servicio/servicio";
+import reporte from "./modules/reporte/reporte";
+
 import resetPass from "./modules/resetPass/resetpass";
 import verificationEmail from "./modules/verificationEmail/verificationEmail";
 
@@ -42,6 +46,9 @@ export default combineReducers({
     seccion,
     curso,
     ciclo,
+    vehiculo,
+    servicio,
+    reporte,
     resetPass,
     verificationEmail,
 });
