@@ -11,7 +11,11 @@ const setReporte = (data) => ({
 } );
 
 export const reportePrincipal = () => (dispatch, getStore) =>{
-    api.get('/reporte/reportePrincipal').then((response)=>{
+    const initial_state = getStore().reporte;
+    const params={
+        usuario: initial_state.usuario
+    }
+    api.get('/reporte/reportePrincipal', params).then((response)=>{
         dispatch(setReporte(response))
     }).catch((error)=>{
         NotificationManager.error(
@@ -37,7 +41,8 @@ export const reducers = {
 };
 
 export const initialState = {
-    
+    data: null,
+    usuario: 0,
 
 };
 

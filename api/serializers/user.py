@@ -34,6 +34,7 @@ class UserReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id',
             'username',
             'first_name',
             'last_name',
@@ -51,7 +52,7 @@ class UserReporteSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username',
+            'first_name',
             'total_vehiculos',
             'total_gastado',
         )

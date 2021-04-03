@@ -14,6 +14,8 @@ class ReporteView(GenericViewSet):
     def reportePrincipal(self, request):
         try:
             print("Bienv")
+            id_usuario = int(request.query_params.get('usuario'))
+            print("Usuario: ", id_usuario)
             #listado de vehiculos
             listado_vehiculos = Vehiculo.objects.all()
 
@@ -22,16 +24,42 @@ class ReporteView(GenericViewSet):
 
             #total de vehiculos por propietario
             usuarios_vehiculo = User.objects.annotate(
+                total_gastado = Sum("vehiculo_user__servicio_vehiculo__precio"),
                 total_vehiculos = Count("vehiculo_user__id")
-            ).annotate(
-                total_gastado = Sum("vehiculo_user__servicio_vehiculo__precio")
             )
+
+            #cuantos servicios tienen los vehiculos con un precio mayor a 1000
+            total_vehi = Servicio.objects.values('vehiculo__nombre').annotate(cantidad = Count('precio',filter=(
+                Q(precio__gte=1000)
+            )))
+
+            #cantidad y gastado en servicios agrupados por modelos de vehiculos
+            total_modelo = Servicio.objects.values('vehiculo__modelo').annotate(
+                cantidad = Count('vehiculo'),
+                suma = Sum('precio')
+            )
+
+            # cantidad de vehiculos agrupados rol de 
+            atol = User.objects.values('rol__nombre').annotate(
+                total_gastado = Sum("vehiculo_user__servicio_vehiculo__precio"))
+            
+            # todos los vehiculos que de los usuarios que sean estudiantes
+            estudent_vehiculos = Vehiculo.objects.filter(propietario__rol__nombre="Estudiante")
+
+            # todos los servicios de los usuarios que sean estudiantes
+            estudent_servicio = Servicio.objects.filter(vehiculo__propietario__rol__nombre="Estudiante")
+
+            print(estudent_servicio)
+            
+            if id_usuario > 0:
+                usuarios_vehiculo = usuarios_vehiculo.filter(id=id_usuario)
             
             total_acumulado = 0
             queryset = Servicio.objects.aggregate(total=Sum('precio'))
             if queryset is not None:
                 total_acumulado = queryset['total']
-           
+            
+            print(total_acumulado)
 
             data = {
                 'listado_vehiculos': VehiculoSerializer(listado_vehiculos, many=True).data,

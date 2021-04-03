@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {RenderCurrency} from '../Utils/renderField/renderReadField';
+import Formulario from './Formulario';
 
 class Reporte extends Component{
     componentWillMount = () => {
@@ -15,6 +16,9 @@ class Reporte extends Component{
                 {data && 
                 <React.Fragment>
                 <div className="d-flex flex-row justify-content-between">
+                    <Formulario
+                        onSubmit={()=>console.log(" ")}
+                    />
                     <h3>Report Principal</h3>
                     <h3><RenderCurrency value={data.total}/></h3>
                 </div>
@@ -30,7 +34,7 @@ class Reporte extends Component{
                     <tbody>
                         {data.listado_con_vehiculos.map((registro, i)=>
                             <tr key={i}>
-                                <td>{registro.username}</td>
+                                <td>{registro.first_name}</td>
                                 <td>{registro.total_vehiculos}</td>
                                 <td><RenderCurrency value={registro.total_gastado}/></td>
                             </tr>
